@@ -3,8 +3,7 @@ import { MoviesService } from '../../services/movies.service';
 import { Subscription, Observable, forkJoin } from 'rxjs';
 import { Carousel } from 'materialize-css';
 import { Movie } from '../../interfaces/movie';
-import { ActivatedRoute, Params } from '@angular/router';
-import { map } from 'rxjs/operators';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 
 @Component({
   selector: 'app-carousel-details',
@@ -22,7 +21,7 @@ export class CarouselDetailsComponent implements OnInit, AfterViewInit, OnDestro
   public characters: Array<any> = [];
   private movieUrl: Params;
 
-  constructor(private movieService: MoviesService, private route: ActivatedRoute) {
+  constructor(private movieService: MoviesService, private route: ActivatedRoute, private router: Router) {
     this.movieUrl = this.route.snapshot.queryParams.movie_url;
     console.log(this.movieUrl);
   }
@@ -85,6 +84,14 @@ export class CarouselDetailsComponent implements OnInit, AfterViewInit, OnDestro
       if (idx === arr.length - 1) {
         // handle requests as one observable
         cb(generatedEndpoints);
+      }
+    });
+  }
+
+  goBack() {
+    this.router.navigate(['carousel'], {
+      queryParams: {
+        carousel_index: this.route.snapshot.queryParams.carousel_index
       }
     });
   }

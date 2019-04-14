@@ -1,11 +1,17 @@
 <div class="carousel" #carousel>
-  <div class="carousel-item" *ngFor="let movie of movies; let idx = index" #carouselItem>
+  <div class="carousel-item" *ngFor="let movie of movies | alphanumericOrder: 'title'; let idx = index" #carouselItem>
     <h2 [innerHTML]="movie.title"></h2>
-    <h4 (click)="handleMovieSelection(carouselItem, movie)">Characters</h4>
+    <h4 (click)="handleMovieSelection(movie, idx)">Characters</h4>
+    <div class="progress" *ngIf="!movie.title">
+      <div class="indeterminate"></div>
+    </div>
   </div>
 </div>
+<div class="progress movie" *ngIf="!movies.length">
+  <div class="indeterminate"></div>
+</div>
 <div class="prev" (click)="navigatePrev()">
-  <i class="material-icons">keyboard_arrow_left</i> 
+  <i class="material-icons">keyboard_arrow_left</i>
 </div>
 <div class="next" (click)="navigateNext()">
   <i class="material-icons">keyboard_arrow_right</i>

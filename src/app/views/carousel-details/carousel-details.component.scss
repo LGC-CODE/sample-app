@@ -1,3 +1,5 @@
+@import 'mixins';
+
 :host {
   display: flex;
   justify-content: center;
@@ -30,21 +32,57 @@
     }
   }
 
+  .progress {
+    width: 50%;
+
+    &.character {
+      position: absolute;
+      width: 40%;
+    }
+  }
+
+  .back {
+    position: absolute;
+    left: 0;
+    top: 5%;
+    padding: 1.5% 2.5%;
+    background: rgba(0, 255, 195, 0.301);
+    display: flex;
+    justify-content: space-between;
+    font-size: 24px;
+    user-select: none;
+
+    i {
+      font-size: 37px;
+      padding-right: 5px;
+
+      @include mobile {
+        font-size: 50px;
+      }
+    }
+  }
+
   .prev {
     position: absolute;
     left: 0;
     cursor: pointer;
+    background: rgba(0, 255, 195, 0.301);
 
     i {
       font-size: 110px;
       user-select: none;
+
+      @include mobile {
+        font-size: 50px;
+      }
     }
   }
-  
+
   .next {
     position: absolute;
     right: 0;
     cursor: pointer;
+    background: rgba(0, 255, 195, 0.301);
 
     i {
       font-size: 110px;

@@ -13,7 +13,7 @@ import { MoviesService } from '../../services/movies.service';
 import { Movie } from '../../interfaces/movie';
 import { Subscription } from 'rxjs';
 import { MovieResponse } from '../../interfaces/movie-response';
-import {Router} from '@angular/router';
+import {Router, ActivatedRoute} from '@angular/router';
 
 @Component({
   selector: 'app-carousel',
@@ -26,13 +26,12 @@ export class CarouselComponent implements OnInit, AfterViewInit, OnDestroy {
   private subscriptions = new Subscription();
   private movieSubscription: Subscription;
   private carouselChildSubscription: Subscription;
-  private movieConfigSubscription: Subscription;
-  private movieConfig;
+  private carouselIndex: number;
   private matCarousel: Carousel;
   public movies: Array<Movie> = [];
   public characters: Array<string> = [];
 
-  constructor(private movieService: MoviesService, private router: Router) {}
+  constructor(private movieService: MoviesService, private router: Router, private route: ActivatedRoute) {}
 
   ngAfterViewInit() {
     this.movieSubscription = this.movieService.getMovies().subscribe((resp: MovieResponse) => {
@@ -43,16 +42,10 @@ export class CarouselComponent implements OnInit, AfterViewInit, OnDestroy {
       this.handleCarouselChildLoad();
     });
 
-    // this.movieConfigSubscription = this.movieService.config.subscribe(
-    //   config => {
-    //     console.log(config);
-    //     this.movieConfig = config;
-    //   }
-    // );
-
     this.subscriptions.add(this.movieSubscription);
     this.subscriptions.add(this.carouselChildSubscription);
-    // this.subscriptions.add(this.movieConfigSubscription);
+
+
   }
 
   ngOnInit() {}
@@ -62,13 +55,22 @@ export class CarouselComponent implements OnInit, AfterViewInit, OnDestroy {
       console.log(this.movies);
       const carouselInit = new Carousel(this.carousel.nativeElement, {});
       this.matCarousel = Carousel.getInstance(carouselInit.el);
+      this.handleReturnToPage();
     }
   }
 
-  handleMovieSelection(carouselItem, movie) {
-    // this.movieConfig.selectedMovie = movie;
-    // this.movieService.config.next(this.movieConfig);
-    this.router.navigate(['carousel-details'], {queryParams: {movie_url: movie.url}});
+  handleMovieSelection(movie, idx) {
+    this.router.navigate(['carousel-details'], {
+      queryParams: {
+        movie_url: movie.url,
+        carousel_index: idx
+      }
+    });
+  }
+
+  handleReturnToPage() {
+    this.carouselIndex = this.route.snapshot.queryParams.carousel_index;
+    this.matCarousel.set(this.carouselIndex);
   }
 
   navigatePrev() {

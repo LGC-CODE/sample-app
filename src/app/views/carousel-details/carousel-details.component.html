@@ -1,8 +1,18 @@
 <div class="carousel" #carousel>
-  <div class="carousel-item" *ngFor="let character of characters; let idx = index" #carouselItem>
+  <div class="carousel-item" *ngFor="let character of characters | alphanumericOrder: 'name'; let idx = index;" #carouselItem>
     <h2 [innerHTML]="character.name"></h2>
     <h4 [innerHTML]="character.species.name"></h4>
+    <div class="progress" *ngIf="!character.species.name">
+      <div class="indeterminate"></div>
+    </div>
   </div>
+</div>
+<div class="progress character" *ngIf="!characters.length">
+  <div class="indeterminate"></div>
+</div>
+<div class="back" (click)="goBack()">
+  <i class="material-icons">arrow_back</i>
+  <span>Back</span>
 </div>
 <div class="prev" (click)="navigatePrev()">
   <i class="material-icons">keyboard_arrow_left</i>
