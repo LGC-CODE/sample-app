@@ -16,6 +16,6 @@ export class SplashScreenComponent implements OnInit {
   transitionOut() {
     setTimeout(() => {
       this.router.navigate(['carousel']);
-    }, 1500);
+    }, 2600);
   }
 }

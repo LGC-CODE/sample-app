@@ -13,6 +13,7 @@ import { MoviesService } from '../../services/movies.service';
 import { Movie } from '../../interfaces/movie';
 import { Subscription } from 'rxjs';
 import { MovieResponse } from '../../interfaces/movie-response';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-carousel',
@@ -25,11 +26,13 @@ export class CarouselComponent implements OnInit, AfterViewInit, OnDestroy {
   private subscriptions = new Subscription();
   private movieSubscription: Subscription;
   private carouselChildSubscription: Subscription;
+  private movieConfigSubscription: Subscription;
+  private movieConfig;
   private matCarousel: Carousel;
   public movies: Array<Movie> = [];
   public characters: Array<string> = [];
 
-  constructor(private movieService: MoviesService) {}
+  constructor(private movieService: MoviesService, private router: Router) {}
 
   ngAfterViewInit() {
     this.movieSubscription = this.movieService.getMovies().subscribe((resp: MovieResponse) => {
@@ -40,8 +43,16 @@ export class CarouselComponent implements OnInit, AfterViewInit, OnDestroy {
       this.handleCarouselChildLoad();
     });
 
+    // this.movieConfigSubscription = this.movieService.config.subscribe(
+    //   config => {
+    //     console.log(config);
+    //     this.movieConfig = config;
+    //   }
+    // );
+
     this.subscriptions.add(this.movieSubscription);
     this.subscriptions.add(this.carouselChildSubscription);
+    // this.subscriptions.add(this.movieConfigSubscription);
   }
 
   ngOnInit() {}
@@ -55,7 +66,9 @@ export class CarouselComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   handleMovieSelection(carouselItem, movie) {
-    console.log(movie);
+    // this.movieConfig.selectedMovie = movie;
+    // this.movieService.config.next(this.movieConfig);
+    this.router.navigate(['carousel-details'], {queryParams: {movie_url: movie.url}});
   }
 
   navigatePrev() {

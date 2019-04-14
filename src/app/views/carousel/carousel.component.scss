@@ -19,6 +19,7 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      flex-direction: column;
       color: white;
       text-align: center;
       padding: 3%;
@@ -36,6 +37,7 @@
 
     i {
       font-size: 110px;
+      user-select: none;
     }
   }
   
@@ -46,6 +48,7 @@
 
     i {
       font-size: 110px;
+      user-select: none;
     }
   }
 }

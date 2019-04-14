@@ -10,13 +10,15 @@ import { AppComponent } from './app.component';
 import { SplashScreenComponent } from './views/splash-screen/splash-screen.component';
 import { CarouselComponent } from './views/carousel/carousel.component';
 import { CarouselDetailsComponent } from './views/carousel-details/carousel-details.component';
+import { AlphanumericOrderPipe } from './pipes/alphanumeric-order.pipe';
 
 @NgModule({
   declarations: [
     AppComponent,
     SplashScreenComponent,
     CarouselComponent,
-    CarouselDetailsComponent
+    CarouselDetailsComponent,
+    AlphanumericOrderPipe
   ],
   imports: [
     BrowserModule,

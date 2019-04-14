@@ -1,0 +1,54 @@
+:host {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  background: linear-gradient(to bottom, #007da5 62% 0, #1a7762 67% 0%, #00ffc4);
+
+  .carousel {
+    width: 100%;
+
+    .carousel-item {
+      width: 500px;
+      height: 500px;
+      background: url('/assets/views/global/home-header.jpg');
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      color: white;
+      text-align: center;
+      padding: 3%;
+
+      h2 {
+        user-select: none;
+      }
+    }
+  }
+
+  .prev {
+    position: absolute;
+    left: 0;
+    cursor: pointer;
+
+    i {
+      font-size: 110px;
+      user-select: none;
+    }
+  }
+  
+  .next {
+    position: absolute;
+    right: 0;
+    cursor: pointer;
+
+    i {
+      font-size: 110px;
+      user-select: none;
+    }
+  }
+}

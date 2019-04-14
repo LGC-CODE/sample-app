@@ -1,4 +1,4 @@
-<div class="carousel" #carousel  *ngIf="characters.length">
+<div class="carousel" #carousel>
   <div class="carousel-item" *ngFor="let movie of movies; let idx = index" #carouselItem>
     <h2 [innerHTML]="movie.title"></h2>
     <h4 (click)="handleMovieSelection(carouselItem, movie)">Characters</h4>
