@@ -1,7 +1,12 @@
-<div class="carousel" #carousel>
-  <a class="carousel-item" href="#one!"><img src="https://lorempixel.com/650/650/nature/1"></a>
-  <a class="carousel-item" href="#two!"><img src="https://lorempixel.com/650/650/nature/2"></a>
-  <a class="carousel-item" href="#three!"><img src="https://lorempixel.com/650/650/nature/3"></a>
-  <a class="carousel-item" href="#four!"><img src="https://lorempixel.com/650/650/nature/4"></a>
-  <a class="carousel-item" href="#five!"><img src="https://lorempixel.com/650/650/nature/5"></a>
+<div class="carousel" #carousel  *ngIf="characters.length">
+  <div class="carousel-item" *ngFor="let movie of movies; let idx = index" #carouselItem>
+    <h2 [innerHTML]="movie.title"></h2>
+    <h4 (click)="handleMovieSelection(carouselItem, movie)">Characters</h4>
+  </div>
+</div>
+<div class="prev" (click)="navigatePrev()">
+  <i class="material-icons">keyboard_arrow_left</i> 
+</div>
+<div class="next" (click)="navigateNext()">
+  <i class="material-icons">keyboard_arrow_right</i>
 </div>
