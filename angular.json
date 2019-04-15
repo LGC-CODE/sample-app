@@ -96,6 +96,11 @@
               "./node_modules/hammerjs/hammer.js",
               "./node_modules/materialize-css/dist/js/materialize.js"
             ],
+            "stylePreprocessorOptions": {
+              "includePaths": [
+                "src/"
+              ]
+            },
             "assets": [
               "src/favicon.ico",
               "src/assets"
