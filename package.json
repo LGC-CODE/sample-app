@@ -2,7 +2,7 @@
   "name": "cybercube-app",
   "version": "0.0.0",
   "scripts": {
-    "start": "cd server && npm start"
+    "postinstall": "cd server"
   },
   "private": true,
   "dependencies": {
